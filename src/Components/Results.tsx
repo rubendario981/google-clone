@@ -9,26 +9,29 @@ import { AiOutlineYoutube } from "react-icons/ai"
 import { IoLocationOutline } from "react-icons/io5"
 import { BsImage } from "react-icons/bs"
 import { SlOptionsVertical } from "react-icons/sl"
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import AllResults from "./AllResults";
 
 const Results = () => {
-	const [openTab, setOpenTab] = useState("todos");
+	const location = useLocation()
+	const [openTab, setOpenTab] = useState("todo");
+	const navigate = useNavigate();
+	
 	const options = [
-		{ icon: <HiMagnifyingGlass />, text: "todos", content: <AllResults /> },
+		{ icon: <HiMagnifyingGlass />, text: "todo", content: <AllResults /> },
 		{ icon: <AiOutlineYoutube />, text: "videos" },
-		{ icon: <BsImage />, text: "imagenes" },
-		{ icon: <FaRegNewspaper />, text: "noticias" },
+		{ icon: <BsImage />, text: "images" },
+		{ icon: <FaRegNewspaper />, text: "news" },
 		{ icon: <IoLocationOutline />, text: "maps" },
-		{ icon: <SlOptionsVertical />, text: "más" },
+		{ icon: <SlOptionsVertical />, text: "more" },
 	]
 	return (
 		<div>
-			<div className="flex items-center mt-4">
+			<div onClick={()=> navigate("/")} className="flex items-center mt-4 hover:cursor-pointer">
 				<img src={logoGoogle} alt="logo google company" className="w-36 pl-6" />
 
 				<div className="flex ml-12 w-full">
-					<Search />
+					<Search textValue={location.search.split('=')[1]}/>
 				</div>
 
 				<div className="w-full flex justify-end mr-6">
@@ -37,22 +40,22 @@ const Results = () => {
 				</div>
 			</div>
 			<div className="flex gap-10 ml-48">
-				{options.map(o => (
-					<NavLink to={""}
-						onClick={() => setOpenTab(o.text)}
-						className={o.text === openTab ? "flex gap-2 items-center border-b-4 border-b-blue-600 pb-2 text-blue-800" : "flex gap-2 items-center pb-2"}
+				{options.map((opt, i) => (
+					<NavLink to={""} key={i}
+						onClick={() => setOpenTab(opt.text)}
+						className={opt.text === openTab ? "flex gap-2 items-center border-b-4 border-b-blue-600 pb-2 text-blue-800" : "flex gap-2 items-center pb-2"}
 					>
-						{o.icon}
-						<span className="first-letter:capitalize">{o.text}</span>
+						{opt.icon}
+						<span className="first-letter:capitalize">{opt.text}</span>
 					</NavLink>
 				))}
 			</div>
-			<div>
-				{options.map((o, i) => (
+			<div className="ml-48">
+				{options.map((opt, i) => (
 					<div key={i}
-						className={o.text === openTab ? "block" : "hidden"}
+						className={opt.text === openTab ? "block" : "hidden"}
 					>
-						{o.content}
+						{opt.content}
 					</div>
 				))}
 			</div>

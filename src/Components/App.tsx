@@ -2,10 +2,14 @@ import logoGoogle from "../assets/logo-google.png";
 import { Search } from "./Search";
 import OptionsHeader from "./OptionsHeader";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
   const navigate = useNavigate()
-  const checkResults = () => navigate("/result")
+  const [txtSearch, setTxtSearch] = useState<string>("")
+  const handleText = (value : string) => setTxtSearch(value)
+  
+  const checkResults = () => navigate(`/result?query=${txtSearch}`)
   return (
     <div className="flex flex-col">
       <div className="flex justify-end gap-5 mt-2 mr-6 py-4 items-center">
@@ -18,7 +22,7 @@ function App() {
       </div>
 
       <div className="flex justify-center w-1/2 mx-auto">
-        <Search />
+        <Search searchParam={handleText}/>
       </div>
 
       <div className="flex justify-center mt-9 gap-6">
