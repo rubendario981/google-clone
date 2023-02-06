@@ -18,18 +18,18 @@ Links to other Google services (e.g. Gmail, Google Drive, etc.)
 
 
 #### Installation
+``
 Clone the repository:
-bash
-Copy code
 git clone https://github.com/rubendario981/google-clone.git
-
+``
 
 #### Install dependencies:
 ##### You must get installed vite in your localmachine
 Go to folder google-clone and 
+```
 > npm install
 > npm run dev
-
+```
 Also the API KEY of the api bing must be include in the file .env
 VITE_API_KEY={YOUR API KEY FROM BING SEARCH ENGINE}
 
@@ -42,4 +42,4 @@ VITE_API_KEY={YOUR API KEY FROM BING SEARCH ENGINE}
 </ul>
 
 
-#### This project is licensed under the MIT License - see the LICENSE file for details.
+#### This project is licensed under the MIT License
